@@ -1,2 +1,1 @@
-jupyter==1.0.0
-Mesa==0.7.6
+Mesa
