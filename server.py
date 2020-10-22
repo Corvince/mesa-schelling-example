@@ -34,4 +34,4 @@ happy_chart = ChartModule([{"Label": "happy", "Color": "Black"}])
 server = ModularServer(SchellingModel,
                        [canvas_element, happy_element, happy_chart],
                        "Schelling’s Segregation Model",
-                       20, 20, 0.8, 0.2, 4)
+                       {"height": 20, "width": 20, "density": 0.8, "minority_pc": 0.2, "homophily": 4})
