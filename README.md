@@ -35,6 +35,35 @@ To view and run some example model analyses, launch the IPython Notebook and ope
 * ``server.py``: Defines classes for visualizing the model in the browser via Mesa's modular server, and instantiates a visualization server.
 * ``analysis.ipybn``: Notebook demonstrating how to run experiments and parameter sweeps on the model.
 
+## How to run on the web using Heroku
+
+If you already have a free Heroku account you can deploy this example as a web app by using the following button
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy).
+
+Otherwise refer to the [Getting Started on Heroku with Python](https://devcenter.heroku.com/articles/getting-started-with-python) to learn about the basics of hosting a web app on Heroku.
+
+If you already set up your model as a git repository you basically only need to create a `Procfile` with the following content
+
+```bash
+web: python run.py -p=$PORT
+```
+
+This tells heroku to launch your model as a web application by running the file `run.py` and specify Herokus default port from the environmental variable `$PORT`
+
+Make sure your models ModularServer is also launched with the same port by using the following snippet inside your `run.py` (if you don't specify the port, future versions of mesa will use this by default)
+
+```python
+from server import server
+import os
+
+port = int(os.getenv("PORT", 4200))
+
+server.launch(port=port, open_browser=False)
+```
+
+That's it! You can view the Schelling model from this repo at https://mesa-schelling-example.herokuapp.com/
+
 ## Further Reading
 
 Schelling's original paper describing the model:
